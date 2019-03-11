@@ -423,7 +423,7 @@ void SCArtNet4::sendDMX(UDP* eUDP, IPAddress to_ip) {
 void SCArtNet4::send_art_poll_reply(UDP* eUDP) {
 	_reply_buffer[18] = _net;
 	_reply_buffer[19] = (_universe >> 4) & 0x0f;
-	//_reply_buffer[190] = (_universe >> 4) & 0x0f;  // TODO Здесь решена проблема с Uni который менял SubUni с 0 на 3
+	//_reply_buffer[190] = (_universe >> 4) & 0x0f;  // TODO пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ Uni пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ SubUni пїЅ 0 пїЅпїЅ 3
 
 	IPAddress a = _broadcast_address;
 	if (a == INADDR_NONE) {
@@ -643,24 +643,24 @@ void  SCArtNet4::initializePollReply(void) {
 	}
 	strcpy((char*)_reply_buffer, "Art-Net");
 	_reply_buffer[7] = 0;
-	_reply_buffer[8] = 0;        // op code lo-hi
+	_reply_buffer[8] = 0;        						// op code lo-hi
 	_reply_buffer[9] = 0x21;
-	_reply_buffer[10] = ((uint32_t)_my_address) & 0xff;      //ip address
+	_reply_buffer[10] = ((uint32_t)_my_address) & 0xff;	//ip address
 	_reply_buffer[11] = ((uint32_t)_my_address) >> 8;
 	_reply_buffer[12] = ((uint32_t)_my_address) >> 16;
 	_reply_buffer[13] = ((uint32_t)_my_address) >> 24;
-	_reply_buffer[14] = 0x36;    // port lo first always 0x1936
+	_reply_buffer[14] = 0x36;    						// port lo first always 0x1936
 	_reply_buffer[15] = 0x19;
-	_reply_buffer[16] = 0;       // firmware hi-lo
+	_reply_buffer[16] = 0;       						// firmware hi-lo
 	_reply_buffer[17] = 1;
-	_reply_buffer[18] = 0;       // subnet hi-lo
+	_reply_buffer[18] = 0;       						// subnet hi-lo
 	_reply_buffer[19] = 0;
-	_reply_buffer[20] = 0x08;       // oem hi-lo 0x1250
-	_reply_buffer[21] = 0xC0;
-	_reply_buffer[22] = 0;       // ubea
-	_reply_buffer[23] = 0xE2;       // status
-	_reply_buffer[24] = 0x0A;    //     ESTA Mfg Code
-	_reply_buffer[25] = 0x05;
+	_reply_buffer[20] = 0xFF;       					// oem hi-lo OemGlobal 0xffff 
+	_reply_buffer[21] = 0xFF;
+	_reply_buffer[22] = 0;       						// ubea
+	_reply_buffer[23] = 0xE2;       					// status
+	_reply_buffer[24] = 0xFF;    						// ESTA Mfg Code FFFFh
+	_reply_buffer[25] = 0xFF;
 	strcpy((char*)&_reply_buffer[26], "SCArtNetDMX4");
 	strcpy((char*)&_reply_buffer[44], "SCArtNetDMX4");
 	_reply_buffer[173] = 4;								// Number of ports
